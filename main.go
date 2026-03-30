@@ -49,9 +49,9 @@ func Main(Context openruntimes.Context) openruntimes.Response {
 
 		if smtpUser != "" || smtpPass != "" {
 			auth := smtp.PlainAuth("", smtpUser, smtpPass, smtpHost)
-			err = smtp.SendMail(smtpHost+":"+smtpPort, auth, smtpUser, []string{request.To}, []byte("Subject: "+request.Subject+"\r\n\r\n"+request.Html))
+			err = smtp.SendMail(smtpHost+":"+smtpPort, auth, smtpSender, []string{request.To}, []byte("Subject: "+request.Subject+"\r\n\r\n"+request.Html))
 		} else {
-			err = smtp.SendMail(smtpHost+":"+smtpPort, nil, "", []string{request.To}, []byte("Subject: "+request.Subject+"\r\n\r\n"+request.Html))
+			err = smtp.SendMail(smtpHost+":"+smtpPort, nil, smtpSender, []string{request.To}, []byte("Subject: "+request.Subject+"\r\n\r\n"+request.Html))
 		}
 
 		if err != nil {
@@ -65,3 +65,4 @@ func Main(Context openruntimes.Context) openruntimes.Response {
 
 	return Context.Res.Text("Invalid path or method", Context.Res.WithStatusCode(404))
 }
+{"to": "lars@mx.cyhop.net", "subject": "OHNO", "html": "OOOOOPS"}
