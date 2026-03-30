@@ -65,4 +65,3 @@ func Main(Context openruntimes.Context) openruntimes.Response {
 
 	return Context.Res.Text("Invalid path or method", Context.Res.WithStatusCode(404))
 }
-{"to": "lars@mx.cyhop.net", "subject": "OHNO", "html": "OOOOOPS"}
