@@ -33,6 +33,19 @@ func Main(Context openruntimes.Context) openruntimes.Response {
 		smtpPort := os.Getenv("SMTP_PORT")
 		smtpUser := os.Getenv("SMTP_USER")
 		smtpPass := os.Getenv("SMTP_PASS")
+		smtpSender := os.Getenv("SMTP_SENDER")
+
+		if smtpHost == "" {
+			return Context.Res.Text("SMTP_HOST environment variable is required", Context.Res.WithStatusCode(500))
+		}
+
+		if smtpPort == "" {
+			smtpPort = "25"
+		}
+
+		if smtpSender == "" {
+			return Context.Res.Text("SMTP_SENDER environment variable is required", Context.Res.WithStatusCode(500))
+		}
 
 		if smtpUser != "" || smtpPass != "" {
 			auth := smtp.PlainAuth("", smtpUser, smtpPass, smtpHost)
